@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управління Журналами</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav { margin-bottom: 20px; }
+        nav a { padding: 10px 15px; text-decoration: none; color: black; border: 1px solid #ddd; margin-right: 5px; }
+        nav a:hover { background-color: #f0f0f0; }
+        form { margin-bottom: 20px; }
+        input, button { padding: 5px; margin: 5px 0; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/genres">Жанри</a>
+    <a href="/books">Книги</a>
+    <a href="/authors">Автори</a>
+    <a href="/publishers">Видавництво</a>
+</nav>
+
+<h1>Управління Журналами</h1>
+
+<h2>Додати Журнал</h2>
+<form method="POST" action="/magazines/add">
+    <label for="magazineTitle">Назва:</label>
+    <input type="text" id="magazineTitle" name="title" required>
+
+    <label for="publisherId">ID Видавця:</label>
+    <input type="number" id="publisherId" name="publisherId" required>
+
+    <label for="releaseDate">Дата випуску:</label>
+    <input type="date" id="releaseDate" name="releaseDate" required>
+
+    <button type="submit">Додати</button>
+</form>
+
+<h2>Оновити Журнал</h2>
+<form method="POST" action="/magazines/update">
+    <label for="magazineId">ID Журналу:</label>
+    <input type="number" id="magazineId" name="id" required>
+
+    <label for="newMagazineTitle">Нова Назва:</label>
+    <input type="text" id="newMagazineTitle" name="title">
+
+    <label for="newPublisherId">Новий ID Видавця:</label>
+    <input type="number" id="newPublisherId" name="publisherId">
+
+    <label for="newReleaseDate">Нова Дата випуску:</label>
+    <input type="date" id="newReleaseDate" name="releaseDate">
+
+    <button type="submit">Оновити</button>
+</form>
+
+<h2>Видалити Журнал</h2>
+<form method="POST" action="/magazines/delete">
+    <label for="deleteMagazineId">ID Журналу:</label>
+    <input type="number" id="deleteMagazineId" name="id" required>
+    <button type="submit">Видалити</button>
+</form>
+
+<h2>Пошук Журналів</h2>
+<form method="POST" action="/magazines/search">
+    <label for="searchMagazineTitle">Назва Журналу:</label>
+    <input type="text" id="searchMagazineTitle" name="title" required>
+    <button type="submit">Пошук</button>
+</form>
+
+<h2>Список Усіx Журналів</h2>
+<form method="GET" action="/magazines">
+    <button type="submit">Показати Усі Журнали</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>ID Видавця</th>
+        <th>Дата випуску</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="magazine : ${magazines}">
+        <td th:text="${magazine.id}"></td>
+        <td th:text="${magazine.title}"></td>
+        <td th:text="${magazine.publisherId}"></td>
+        <td th:text="${magazine.releaseDate}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управління Авторами</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav { margin-bottom: 20px; }
+        nav a { padding: 10px 15px; text-decoration: none; color: black; border: 1px solid #ddd; margin-right: 5px; }
+        nav a:hover { background-color: #f0f0f0; }
+        form { margin-bottom: 20px; }
+        input, button { padding: 5px; margin: 5px 0; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+<!-- Навігаційне меню -->
+<nav>
+    <a href="/genres">Жанри</a>
+    <a href="/books">Книги</a>
+    <a href="/magazines">Журнали</a>
+    <a href="/publishers">Видавництво</a>
+</nav>
+
+<h1>Управління Авторами</h1>
+
+<!-- Форма додавання автора -->
+<h2>Додати Автора</h2>
+<form method="POST" action="/authors/add">
+    <label for="authorName">Ім'я:</label>
+    <input type="text" id="authorName" name="name" required>
+    <label for="authorBirthYear">Рік народження:</label>
+    <input type="number" id="authorBirthYear" name="birthYear" required>
+    <button type="submit">Додати</button>
+</form>
+
+<!-- Форма для оновлення автора -->
+<h2>Оновити Автора</h2>
+<form method="POST" action="/authors/update">
+    <label for="authorId">ID Автора:</label>
+    <input type="number" id="authorId" name="id" required>
+    <label for="newAuthorName">Нове Ім'я:</label>
+    <input type="text" id="newAuthorName" name="name" required>
+    <label for="newBirthYear">Новий Рік народження:</label>
+    <input type="number" id="newBirthYear" name="birthYear" required>
+    <button type="submit">Оновити</button>
+</form>
+
+<!-- Форма для видалення автора -->
+<h2>Видалити Автора</h2>
+<form method="POST" action="/authors/delete">
+    <label for="deleteAuthorId">ID Автора:</label>
+    <input type="number" id="deleteAuthorId" name="id" required>
+    <button type="submit">Видалити</button>
+</form>
+
+<!-- Форма для пошуку авторів -->
+<h2>Пошук Авторів</h2>
+<form method="POST" action="/authors/search">
+    <label for="searchAuthorName">Ім'я Автора:</label>
+    <input type="text" id="searchAuthorName" name="name" required>
+    <button type="submit">Пошук</button>
+</form>
+
+<!-- Кнопка для перегляду всіх авторів -->
+<h2>Список Усіx Авторів</h2>
+<form method="GET" action="/authors">
+    <button type="submit">Показати Усі Автори</button>
+</form>
+
+<!-- Таблиця для відображення авторів -->
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Ім'я</th>
+        <th>Рік народження</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="author : ${authors}">
+        <td th:text="${author.id}"></td>
+        <td th:text="${author.name}"></td>
+        <td th:text="${author.birthYear}"></td>
+    </tbody>
+</table>
+
+</body>
+</html>

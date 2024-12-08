@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управління Книгами</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav { margin-bottom: 20px; }
+        nav a { padding: 10px 15px; text-decoration: none; color: black; border: 1px solid #ddd; margin-right: 5px; }
+        nav a:hover { background-color: #f0f0f0; }
+        form { margin-bottom: 20px; }
+        input, button { padding: 5px; margin: 5px 0; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+<nav>
+    <a href="/genres">Жанри</a>
+    <a href="/authors">Автори</a>
+    <a href="/magazines">Журнали</a>
+    <a href="/publishers">Видавництво</a>
+</nav>
+
+<h1>Управління Книгами</h1>
+
+<h2>Додати Книгу</h2>
+<form method="POST" action="/books/add">
+    <label for="bookTitle">Назва книги:</label>
+    <input type="text" id="bookTitle" name="title" required>
+
+    <label for="publisherId">ID Видавця:</label>
+    <input type="number" id="publisherId" name="publisherId" required>
+
+    <label for="authorId">ID Автора:</label>
+    <input type="number" id="authorId" name="authorId" required>
+
+    <label for="genreId">ID Жанру:</label>
+    <input type="number" id="genreId" name="genreId" required>
+
+    <label for="releaseDate">Дата випуску:</label>
+    <input type="date" id="releaseDate" name="releaseDate" required>
+
+    <button type="submit">Додати</button>
+</form>
+
+<h2>Оновити Книгу</h2>
+<form method="POST" action="/books/update">
+    <label for="bookId">ID Книги:</label>
+    <input type="number" id="bookId" name="id" required>
+
+    <label for="newBookTitle">Нова Назва книги:</label>
+    <input type="text" id="newBookTitle" name="title">
+
+    <label for="newPublisherId">Новий ID Видавця:</label>
+    <input type="number" id="newPublisherId" name="publisherId">
+
+    <label for="newAuthorId">Новий ID Автора:</label>
+    <input type="number" id="newAuthorId" name="authorId">
+
+    <label for="newGenreId">Новий ID Жанру:</label>
+    <input type="number" id="newGenreId" name="genreId">
+
+    <label for="newReleaseDate">Нова Дата випуску:</label>
+    <input type="date" id="newReleaseDate" name="releaseDate">
+
+    <button type="submit">Оновити</button>
+</form>
+
+<h2>Видалити Книгу</h2>
+<form method="POST" action="/books/delete">
+    <label for="deleteBookId">ID Книги:</label>
+    <input type="number" id="deleteBookId" name="id" required>
+    <button type="submit">Видалити</button>
+</form>
+
+<h2>Пошук Книг</h2>
+<form method="POST" action="/books/search">
+    <label for="searchBookTitle">Назва книги:</label>
+    <input type="text" id="searchBookTitle" name="title" required>
+    <button type="submit">Пошук</button>
+</form>
+
+<h2>Список Усіx Книг</h2>
+<form method="GET" action="/books">
+    <button type="submit">Показати Усі Книги</button>
+</form>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Назва</th>
+        <th>ID Видавця</th>
+        <th>ID Автора</th>
+        <th>ID Жанру</th>
+        <th>Дата випуску</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.title}"></td>
+        <td th:text="${book.publisherId}"></td>
+        <td th:text="${book.authorId}"></td>
+        <td th:text="${book.genreId}"></td>
+        <td th:text="${book.releaseDate}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

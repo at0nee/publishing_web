@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управління Жанрами</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav { margin-bottom: 20px; }
+        nav a { padding: 10px 15px; text-decoration: none; color: black; border: 1px solid #ddd; margin-right: 5px; }
+        nav a:hover { background-color: #f0f0f0; }
+        form { margin-bottom: 20px; }
+        input, button { padding: 5px; margin: 5px 0; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+
+<!-- Навігаційне меню -->
+<nav>
+    <a href="/authors">Автори</a>
+    <a href="/books">Книги</a>
+    <a href="/magazines">Журнали</a>
+    <a href="/publishers">Видавництво</a>
+</nav>
+
+<h1>Управління Жанрами</h1>
+
+<!-- Форма додавання жанру -->
+<h2>Додати Жанр</h2>
+<form method="POST" action="/genres/add">
+    <label for="genreName">Назва жанру:</label>
+    <input type="text" id="genreName" name="name" required>
+    <button type="submit">Додати</button>
+</form>
+
+<!-- Форма для оновлення жанру -->
+<h2>Оновити Жанр</h2>
+<form method="POST" action="/genres/update">
+    <label for="genreId">ID Жанру:</label>
+    <input type="number" id="genreId" name="id" required>
+    <label for="newGenreName">Нова Назва жанру:</label>
+    <input type="text" id="newGenreName" name="name" required>
+    <button type="submit">Оновити</button>
+</form>
+
+<!-- Форма для видалення жанру -->
+<h2>Видалити Жанр</h2>
+<form method="POST" action="/genres/delete">
+    <label for="deleteGenreId">ID Жанру:</label>
+    <input type="number" id="deleteGenreId" name="id" required>
+    <button type="submit">Видалити</button>
+</form>
+
+<!-- Форма для пошуку жанрів -->
+<h2>Пошук Жанрів</h2>
+<form method="POST" action="/genres/search">
+    <label for="searchGenreName">Назва жанру:</label>
+    <input type="text" id="searchGenreName" name="name" required>
+    <button type="submit">Пошук</button>
+</form>
+
+<!-- Кнопка для перегляду всіх жанрів -->
+<h2>Список Усіx Жанрів</h2>
+<form method="GET" action="/genres">
+    <button type="submit">Показати Усі Жанри</button>
+</form>
+
+<!-- Таблиця для відображення жанрів -->
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Назва</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="genre : ${genres}">
+        <td th:text="${genre.id}"></td>
+        <td th:text="${genre.name}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
